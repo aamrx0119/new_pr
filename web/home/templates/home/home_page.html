@@ -1,0 +1,306 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block title %}
+    Home
+{% endblock title %}
+
+
+{% block content %}
+<!--Section: Block Content-->
+         <!-- header section start -->
+         <div class="header_section">
+            {% include 'main/messages.html' %}
+            <div class="container">
+               <div class="containt_main">
+                  <div id="mySidenav" class="sidenav">
+                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                     <a href="index.html">Home</a>
+                     <a href="fashion.html">Fashion</a>
+                     <a href="electronic.html">Electronic</a>
+                     <a href="jewellery.html">Jewellery</a>
+                     
+                  </div>
+                  <span class="toggle_icon" onclick="openNav()"><img src="{% static 'home/main/images/toggle-icon.png' %}"></span>
+                  <div class="dropdown">
+                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category 
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <!-- I HAVE TO ADD A BUTTON TO SHOW SUB I DO IT LATER -->
+                        {% for cat in category %}
+                        <a class="dropdown-item" href="#">{{cat.title|capfirst}}</a>
+                        
+                           {% for sub in cat.sub_category.all %}
+                              <a class="dropdown-item" href="">{{sub.title}}</a>
+                           {% endfor %}
+                        
+                        {% endfor %}
+                        <!-- {% for cat in category %}
+                        <div class="btn-group">
+                           <a href="" class="btn btn-danger">{{ cat.title }}</a>
+                           <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                           <div class="dropdown-menu">
+                               {% for sub in cat.sub_category.all %}
+                                   <a class="dropdown-item" href="">{{ sub.title }}</a>
+                               {% endfor %}
+                           </div>
+                       </div>
+                       {% endfor%} -->
+                     </div>
+                  </div>
+                  <div class="main">
+                     <!-- Another variation with a button -->
+                     <div class="input-group">
+                        <form id="search-form" action="">
+                           {% csrf_token %}
+                        <input id="search-input" type="text" style="width: 120mm;" class="form-control" placeholder="Search this blog">
+                        <div class="input-group-append">
+                           <button class="btn btn-secondary" type="button" style="background-color: #f26522; border-color:#f26522 ">
+                              <i class="fa fa-search"></i>
+                           </button>
+                        </form>
+                        </div>
+                     </div>
+                     <div id="results-box" class="results-card not-visible"><b></b>
+                     </div>
+                     
+                  </div>
+                  <div class="header_box">
+                     <div class="lang_box " style="height: 10mm;">
+                        <a href="#" title="Language" class="nav-link" data-toggle="dropdown" aria-expanded="true">
+                        <img src="{% static 'home/main/images/flag-uk.png' %}" alt="flag" class="mr-2 " title="United Kingdom"> English <i class="fa fa-angle-down ml-2" aria-hidden="true"></i>
+                        </a>
+                        <div class="dropdown-menu ">
+                           <a href="#" class="dropdown-item">
+                           <img src="{% static 'home/main/images/flag-france.png' %}" class="mr-2" alt="flag">
+                           French
+                           </a>
+                        </div>
+                     </div>
+                     <div class="login_menu">
+                        <ul>
+                           <li><a href="{% url 'cart:checkout_summary_view' %}">
+                              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                              <span class="padding_10">{{ request.session.cart.keys|length }}</span>
+                           </li>
+                        </a>
+                        <li><a href="{% url 'profiles:profile_dashboard_view' %}">
+                              <i class="fa fa-user" aria-hidden="true"></i>
+                              <span class="padding_10">{{request.user.first_name}}</span></a>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- header section end -->
+         <!-- banner section start -->
+         <div class="banner_section layout_padding">
+            <div class="container">
+               <div id="my_slider" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                     <div class="carousel-item active">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
+                              <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="carousel-item">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
+                              <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="carousel-item">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
+                              <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+                  <i class="fa fa-angle-left"></i>
+                  </a>
+                  <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+                  <i class="fa fa-angle-right"></i>
+                  </a>
+               </div>
+            </div>
+         </div>
+         <!-- banner section end -->
+      </div>
+      <!-- banner bg main end -->
+   </br></br></br>
+<!-- banner bg main end -->
+<!-- fashion section start -->
+<div class="fashion_section">
+ <div id="main_slider" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+       <div class="carousel-item active">
+          <div class="container">
+             <h1 class="fashion_taital">Women cloths</h1>
+             <div class="fashion_section_2">
+                <div class="row">
+                  {% for post in posts %}
+                   <div class="col-lg-4 col-sm-4" >
+                      <div class="box_main"  >
+                         <h4 class="shirt_text">{{post.name}}</h4>
+                         <p class="price_text">Price <span style="color: #262626;">$ {% if post.discount %}{{post.discount}}{% else %}{{post.price}}{% endif %}</span></p>
+                         <div class="tshirt_img"><a href="{{post.get_absoulte_url}}"><img src="{{post.image.url}}" style="width: 300px; height: 300px;" ></a></div>
+                         <div class="btn_main">
+                            <div class="buy_bt"><a href="{{post.get_absoulte_url}}">Buy Now</a></div>
+                            <div class="seemore_bt"><a href="#">See More</a></div>
+                         </div>
+                      </div>
+                   </div>
+                  {% endfor %}
+                  <div class="form-group"> 
+                  <button class="seemore btn btn-danger btn-lg float-right " style="width: 100mm; ">See more</button>
+                  </div>
+                  <!-- <div class="seemore-box" >
+                         {% for c in posts %}
+                         
+                         <div class="col-lg-4 col-sm-4">
+                           <div class="box_main" >
+                              <h4 class="shirt_text">{{c.name}}</h4>
+                              <p class="price_text">Price  <span style="color: #262626;">$ 30</span></p>
+                              <div class="tshirt_img"><img src="{{c.image.url}}" ></div>
+                              <div class="btn_main">
+                                 <div class="buy_bt"><a href="{{c.get_absoulte_url}}">Buy Now</a></div>
+                                 <div class="seemore_bt"><a href="#">See More</a></div>
+                              </div>
+                           </div>
+                        </div>
+                         
+                         {% endfor %}
+                  </div> -->
+
+                  <!-- <nav aria-label="...">
+                     {% if post.has_other_pages %}
+                     <ul class="pagination">
+                        <li class="page-item disabled">
+                          <span class="page-link">Previous</span>
+                        </li>
+                        {% if post.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{ post.previous_page_number }}">{{ post.previous_page_number }}</a></li>
+                        {% endif %}
+                           <li class="page-item active">
+                              <span class="page-link">
+                                 {{ post.number }}
+                                 
+                                 <span class="sr-only">(current)</span>
+                              </span>
+                           </li>
+                       {% if post.has_next %}
+                       <li class="page-item"><a class="page-link" href="?page={{ post.next_page_number }}">{{ post.next_page_number }}</a></li>
+                       {% endif %}
+                       <li class="page-item">
+                         <a class="page-link" href="#">Next</a>
+                       </li>
+                     </ul>
+                  {% endif %}
+                   </nav> -->
+                </div>
+             </div>
+          </div>
+       </div>
+ </div>
+</div>
+<!-- fashion section end -->
+<hr>
+
+<!-- jewellery  section end -->
+<!-- banner bg main end -->
+<!-- fashion section start -->
+<div class="fashion_section">
+   <div id="main_slider" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+         <div class="carousel-item active">
+            <div class="container">
+               <h1 class="fashion_taital">men cloths</h1>
+               <div class="fashion_section_2">
+                  <div class="row">
+                    {% for post in posts %}
+                     <div class="col-lg-4 col-sm-4">
+                        <div class="box_main" >
+                           <h4 class="shirt_text">{{post.name}}</h4>
+                           <p class="price_text">Price  <span style="color: #262626;">$ 30</span></p>
+                           <div class="tshirt_img"><a href="{{post.get_absoulte_url}}"><img src="{{post.image.url}}" style="width: 300px; height: 300px;" ></a></div>
+                           <div class="btn_main">
+                              <div class="buy_bt"><a href="{{post.get_absoulte_url}}">Buy Now</a></div>
+                           </div>
+                        </div>
+                     </div>
+                    {% endfor %}
+                    <div class="form-group"> 
+                    <button class=" btn btn-success btn-lg float-right " style="width: 100mm; ">See more</button>
+                    </div>
+                  
+  
+                    <!-- <nav aria-label="...">
+                       {% if post.has_other_pages %}
+                       <ul class="pagination">
+                          <li class="page-item disabled">
+                            <span class="page-link">Previous</span>
+                          </li>
+                          {% if post.has_previous %}
+                          <li class="page-item"><a class="page-link" href="?page={{ post.previous_page_number }}">{{ post.previous_page_number }}</a></li>
+                          {% endif %}
+                             <li class="page-item active">
+                                <span class="page-link">
+                                   {{ post.number }}
+                                   
+                                   <span class="sr-only">(current)</span>
+                                </span>
+                             </li>
+                         {% if post.has_next %}
+                         <li class="page-item"><a class="page-link" href="?page={{ post.next_page_number }}">{{ post.next_page_number }}</a></li>
+                         {% endif %}
+                         <li class="page-item">
+                           <a class="page-link" href="#">Next</a>
+                         </li>
+                       </ul>
+                    {% endif %}
+                     </nav> -->
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+  </div>     
+</body>
+</html>
+
+
+
+{% endblock content %}
+
+{% block js_files %}
+<script>
+        $( document ).ready(function() {
+            let display = false
+            $(".seemore").click(function () {
+               if (display===false) {
+                    $(this).next(".seemore-box").show("slow");
+                    display=true
+                    console.log('this bottom worked')
+                } else {
+                    $(this).next(".seemore-box").hide("slow");
+                    display=false
+                    console.log('this bottom worked1213312')
+                }  
+               
+
+            });
+        });
+</script>
+<script src="{% static 'home/js/home_js.js' %}"></script>
+
+
+{% endblock js_files %}
