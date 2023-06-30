@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Profile
+{% endblock title%}
+
+{% block content%}
+<div class="card text-center">
+    <div class="card-header">
+     Profile
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{qs.email}}</h5>
+      <p class="card-text"> Hello {{qs.first_name }} {{qs.first_name }}</p>
+    </div>
+    <div class="card-footer text-muted">
+    </div>
+</div>
+<hr>
+<h2 class="text-center">The product that you add to orderitem </h2>
+{% for orders in order %}
+  {% for i in orders.get_order_item_from_order %}
+  <img src="{{i.product.image.url}}" class="rounded-circle" alt="" width="100px">
+  {% endfor %}
+  <div class="card text-white bg-success mb-3" style= "width: 20rem; max-width: 18rem;">
+    <div class="card-header">{{orders.created|timesince }} </div>
+    <div class="card-body">
+      <h5 class="card-title">Success order</h5>
+      <p class="card-text">Thanks for your order.</p>
+    </div>
+  </div>
+  <hr>
+  <!-- It's just for test after that i change the html -->
+  <!-- {% if products.ordered == False%}
+    <h2>ordered : false </h2>
+    {% else %}
+    <h2>ordered : true </h2> -->
+    <!-- {% endif %} -->
+
+
+
+  
+{% endfor %}
+
+    
+<!-- End Model -->
+
+{% endblock content%}

@@ -1,0 +1,190 @@
+
+{% extends 'base.html' %}
+{% load static%}
+{% block title %}
+    Home
+{% endblock title %}
+
+
+
+{% block content %}
+<!--Section: Block Content-->
+         <!-- header section start -->
+         <div class="header_section">
+          {% include 'main/messages.html' %}
+          <div class="container">
+             <div class="containt_main">
+                <div id="mySidenav" class="sidenav">
+                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                   <a href="index.html">Home</a>
+                   <a href="fashion.html">Fashion</a>
+                   <a href="electronic.html">Electronic</a>
+                   <a href="jewellery.html">Jewellery</a>
+                </div>
+                <span class="toggle_icon" onclick="openNav()"><img src="{% static 'home/main/images/toggle-icon.png' %}"></span>
+                <div class="dropdown">
+                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category 
+                   </button>
+                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                   </div>
+                </div>
+                <div class="main">
+                   <!-- Another variation with a button -->
+                   <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Search this blog">
+                      <div class="input-group-append">
+                         <button class="btn btn-secondary" type="button" style="background-color: #f26522; border-color:#f26522 ">
+                            <i class="fa fa-search"></i>
+                         </button>
+                      </div>
+                   </div>
+                </div>
+                <div class="header_box">
+                   <div class="lang_box ">
+                      <a href="#" title="Language" class="nav-link" data-toggle="dropdown" aria-expanded="true">
+                      <img src="{% static 'home/main/images/flag-uk.png' %}" alt="flag" class="mr-2 " title="United Kingdom"> English <i class="fa fa-angle-down ml-2" aria-hidden="true"></i>
+                      </a>
+                      <div class="dropdown-menu ">
+                         <a href="#" class="dropdown-item">
+                         <img src="{% static 'home/main/images/flag-france.png' %}" class="mr-2" alt="flag">
+                         French
+                         </a>
+                      </div>
+                   </div>
+                   <div class="login_menu">
+                      <ul>
+                         <li><a href="{% url 'cart:checkout_summary_view' %}">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <span class="padding_10">{{ request.session.cart.keys|length }}</span>
+                         </li>
+                      </a>
+                      <li><a href="{% url 'profiles:profile_dashboard_view' %}">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span class="padding_10">{{request.user.first_name}}</span></a>
+                         </li>
+                      </ul>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <!-- header section end -->
+       <!-- banner section start -->
+       <div class="banner_section layout_padding">
+          <div class="container">
+             <div id="my_slider" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                   <div class="carousel-item active">
+                      <div class="row">
+                         <div class="col-sm-12">
+                            <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
+                            <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="carousel-item">
+                      <div class="row">
+                         <div class="col-sm-12">
+                            <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
+                            <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="carousel-item">
+                      <div class="row">
+                         <div class="col-sm-12">
+                            <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
+                            <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+                </a>
+             </div>
+          </div>
+       </div>
+       <!-- banner section end -->
+    </div>
+    <!-- banner bg main end -->
+ </br></br></br>
+
+<section class="mb-5">
+  
+  
+  <div class="row">
+    <div class="col-md-6 mb-4 mb-md-0">
+      
+      <div id="mdb-lightbox-ui"></div>
+      
+      <div class="mdb-lightbox">
+        
+        <div class="row product-gallery mx-1">
+          
+          <div class="col-12 mb-0">
+              </br>
+                <a href="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15a.jpg"
+                  data-size="710x823">
+                  <img src="{{product.image.url}}" width="550px" class="rounded float-left" alt="...">  
+                </a>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <p class="font-weight-bold">{{product.name}}</p>
+        <p class="text-left">Info:{{product.information}}</p>
+          {% for tags in product.tags.all %}
+          <span class="badge badge-{{bigh}}">{{tags}}</span>
+          {% endfor %}
+          <span class="badge badge-success">{{product.category}}</span>
+          <p><span class="mr-1"><strong>Price :{{product.live_price}}$</strong></span></p>
+          <p><span class="mr-1"><strong>Storage :{{product.num_exists}}</strong></span></p>
+          <form action="{% url 'cart:add' product.slug %}" method="post">
+            <div class="form-group">
+              {% csrf_token %}
+              <label for="quantity_id">Quantity</label>
+              <input  placeholder="Enter" type="number" id="quantity_id" max="{{product.num_exists}}" min="1" name="quantity1"  value="1" aria-label="Search" class="form-control" style="width: 200px" required>
+              <small id="emailHelp" class="form-text text-muted">Select your quantity you can't select more than {{product.num_exists}} </small>
+            </div>
+              <button class= 'btn btn-danger' type="submit" >Add to cart </button>
+          </form>
+
+
+        <form action="{% url 'home:bookmark_view' %}" method="post" class="bookmark" id="{{product.id}}">
+            {% csrf_token %}
+            {% if stats%}
+            <button><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-dash-fill like-btn" viewBox="0 0 16 16">
+            <path class="which-is" fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM6 6a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/>
+            </svg>
+            </button>
+            {% else %}
+            <button><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-check-fill like-btn" viewBox="0 0 16 16">
+            <path class="which-is" fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+            </svg>
+            </button>
+            {% endif %}
+        </form>
+      </div>
+    </div>
+  
+</section>
+  <!--Section: Block Content-->
+  
+
+{% endblock content %}
+
+
+
+{% block js_files %}
+<script src="{% static 'home/main/js/detail_page.js' %}"></script>
+{% endblock js_files %}
